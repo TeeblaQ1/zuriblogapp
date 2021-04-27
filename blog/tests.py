@@ -53,8 +53,8 @@ class BlogTests(TestCase):
             'author': self.user.id,
         })
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(Post.objects.last().title, 'New title')
-        self.assertEqual(Post.objects.last().body, 'New body')
+        self.assertEqual(Post.objects.last().title, 'This is a test title')
+        self.assertEqual(Post.objects.last().body, 'Just a casual body that I am testing with')
         
     def test_post_update_view(self):
         response = self.client.post(reverse('edit', args='1'), {

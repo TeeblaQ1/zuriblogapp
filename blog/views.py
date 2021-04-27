@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post, Comment
 from django.urls import reverse_lazy
 from .forms import CommentForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class BlogListView(ListView):
@@ -32,17 +33,21 @@ def postDetailView(request, pk):
     return render(request, 'detail.html', {'post': post, 'comments': comments,
                                                 'new_comment': new_comment, 'comment_form': comment_form})
 
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'new.html'
-    fields = ['title', 'author', 'body']
+    fields = ['title', 'body']
 
-class BlogUpdateView(UpdateView):
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'edit.html'
     fields = ['title', 'body']
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'delete.html'
     success_url = reverse_lazy('home')
