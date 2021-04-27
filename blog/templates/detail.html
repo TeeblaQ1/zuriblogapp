@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <header class="blog-post-header">
+        <h2 class="title mb-2">{{ post.title }}</h2>
+        <div class="meta mb-3"><span class="date">Published 3 months ago</span><span class="time">5 min read</span><span class="comment"><a href="#">
+            {% with comments.count as total_comments %} {{ total_comments }} comment{{ total_comments|pluralize }} {% endwith %}</a></span></div>
+    </header>
+
+    <div class="blog-post-body">
+        {{ post.body }}
+    </div>
+    <br><br>
+    <p><a class="more-link" href="{% url 'edit' post.pk %}">+ Edit Blog Post</a></p>
+    <p><a class="more-link" href="{% url 'delete' post.pk %}">+ Delete Blog Post</a></p>
+
+    {% for comment in comments %}
+        <div>
+            <p>
+                Comment {{ forloop.counter }} by {{ comment.name }} | {{ comment.created }}
+            </p>
+            {{ comment.body|linebreaks }}
+        </div>
+    {% empty %}
+        <p>There are no comments yet. Be the first to comment!</p>
+    {% endfor %}
+        <hr>
+    {% if new_comment %}
+        <p>Your comment has been added.</p>
+    {% else %}
+        {% if user.is_authenticated %}
+            <h3>Add a Comment</h3>
+            <form method="POST">
+                {{ comment_form.as_p }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Add Comment</button>
+            </form>
+        {% else %}
+            <p>You need to be logged in to comment!</p>
+            <div><a href="{% url 'login' %}">Log In</a> | <a href="{% url 'signup' %}">Sign Up</a></div>
+        {% endif %}
+    {% endif %}
+{% endblock content %}

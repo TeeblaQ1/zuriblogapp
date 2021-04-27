@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <header class="blog-post-header">
+        <h2 class="title mb-2">Sign Up</h2>
+    </header>
+    <form action="" method="POST">
+        {{ form.as_p }}
+        <button type="submit">Sign Up</button>
+        {% csrf_token %}
+    </form>
+{% endblock content %}
