@@ -2,6 +2,10 @@
 
 Zuri Django Blog is a blog application written using django on the backend. It is a blog that allows users to post articles, read and comment on articles. Users can signup, login, logout, reset password etc.
 
+## Website
+
+The application has been deployed on the web and it is available at [Zuri Django Blog](https://zuridjangoblog.herokuapp.com/).
+
 ## Installation
 
 Clone the django directory to your local folder
