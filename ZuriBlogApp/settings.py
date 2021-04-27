@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-+%u1xk9mf37r=o
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = os.environ.get('DJANGO_DEBUG')
+DEBUG = False
 
 ALLOWED_HOSTS = ['zuridjangoblog.herokuapp.com', '127.0.0.1', 'localhost']
 
