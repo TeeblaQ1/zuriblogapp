@@ -7,9 +7,9 @@
                 <!-- <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="" alt="image"> -->
                 <div class="media-body">
                     <h3 class="title mb-1"><a href="{% url 'detail' post.pk %}">{{ post.title }}</a></h3>
-                    <div class="meta mb-1"><span class="date">Published 2 days ago</span><span class="time">5 min read</span><span class="comment"><a href="#">8 comments</a></span></div>
+                    <div class="meta mb-1"><span class="date">Published 2 days ago</span><span class="time">5 min read</span></div>
                     <div class="intro">{{ post.body|truncatewords:30 }}</div>
-                    <a class="more-link" href="">Read more &rarr;</a>
+                    <a class="more-link" href="{% url 'detail' post.pk %}">Read more &rarr;</a>
                 </div><!--//media-body-->
             </div><!--//media-->
         </div><!--//item-->
